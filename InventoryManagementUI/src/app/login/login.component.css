@@ -1,0 +1,22 @@
+.login-container {
+    padding: 3%;
+    padding-top: 10%;
+}
+
+.login-box {
+    border: 1px solid rgb(2, 2, 182);
+    border-radius: 5px;
+    padding: 0px;
+}
+
+.login-header {
+    color: white;
+    background: rgb(2, 2, 182);
+    padding-left: 5%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+
+.login-form {
+    padding: 5%;
+}
