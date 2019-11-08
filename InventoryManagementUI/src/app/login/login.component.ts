@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, Validators } from '@angular/forms';
 import { LoginService } from '../login.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -16,7 +17,8 @@ export class LoginComponent implements OnInit {
 
   constructor(
     private fb: FormBuilder,
-    private loginService: LoginService) { }
+    private loginService: LoginService,
+    private router: Router) { }
 
   ngOnInit() {
   }
@@ -24,9 +26,8 @@ export class LoginComponent implements OnInit {
   login() {
     this.loginService.userLogin(this.loginData.value)
       .subscribe(res => {
-        console.log(res);
-
-      })
+        this.router.navigate(['/products']);
+      });
   }
 
 }

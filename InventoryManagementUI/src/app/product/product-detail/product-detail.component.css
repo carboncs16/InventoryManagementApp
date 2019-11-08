@@ -1,0 +1,15 @@
+.product-list-box {
+    border: 1px solid rgb(2, 2, 182);
+    border-radius: 5px;
+    padding: 0px;
+}
+.product-header {
+    color: white;
+    background: rgb(2, 2, 182);
+    padding-left: 5%;
+    padding-top: 2%;
+    padding-bottom: 2%;
+}
+.product-list-content {
+    padding: 5%;
+}

@@ -1,0 +1,23 @@
+<div class="product-list-box" *ngIf="selectedProduct">
+    <div class="product-header">
+        <span> Product Details</span><span style="float: right">{{selectedProduct.productName}}:
+            {{selectedProduct._id}}</span>
+
+    </div>
+    <div class="product-list-content">
+        <div style="padding: 3%">
+            <div class="form-group">
+                <label for="productName">Name</label>
+                <input type="text" id="productName" [(ngModel)]="selectedProduct.productName" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="price">Price</label>
+                <input type="text" id="price" [(ngModel)]="selectedProduct.price" class="form-control">
+            </div>
+            <div class="form-group">
+                <label for="rating">Rating</label>
+                <input type="number" id="rating" [(ngModel)]="selectedProduct.rating" class="form-control">
+            </div>
+        </div>
+    </div>
+</div>
