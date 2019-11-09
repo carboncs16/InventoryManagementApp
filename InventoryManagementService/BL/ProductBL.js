@@ -8,6 +8,13 @@ productBusLog.getProducts = () => {
         });
 }
 
+productBusLog.getProductById = (id) => {
+    return productDB.getProductById(id)
+        .then(res => {
+            return res;
+        });
+}
+
 productBusLog.addProduct = (product) => {
     return productDB.addProduct(product)
         .then(res => {

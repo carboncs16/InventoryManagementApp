@@ -2,6 +2,7 @@ import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
 import { ProductService } from '../product.service';
 import { NgbModal } from '@ng-bootstrap/ng-bootstrap';
 import { AddProductComponent } from '../add-product/add-product.component';
+import { delay } from 'rxjs/operators';
 
 @Component({
   selector: 'app-product-detail',
@@ -9,9 +10,19 @@ import { AddProductComponent } from '../add-product/add-product.component';
   styleUrls: ['./product-detail.component.css']
 })
 export class ProductDetailComponent implements OnInit {
-
-  @Input() selectedProduct;
+  loading = true;
+  @Input() set selectedProductId(value) {
+    this.loading = true;
+    this.productService.getProductById(value)
+      .pipe(delay(1000))
+      .subscribe(res => {
+        this.loading = false;
+        this.selectedProduct = res;
+      });
+  }
+  selectedProduct;
   @Output() refreshProductList = new EventEmitter();
+  @Output() hideProductDetail = new EventEmitter();
 
   constructor(
     private productService: ProductService,
@@ -23,16 +34,24 @@ export class ProductDetailComponent implements OnInit {
 
   updateProduct() {
     this.productService.updateProduct(this.selectedProduct)
-    .subscribe(res => {
-      console.log(res);
-    });
+      .pipe(delay(1000))
+      .subscribe(res => {
+        this.refreshProductList.emit();
+      });
   }
 
   openAddProductModal() {
     const modalRef = this.modalService.open(AddProductComponent);
     modalRef.componentInstance.refreshProductList.subscribe(() => {
-      this.refreshProductList.emit()
+      this.refreshProductList.emit();
     });
+  }
+
+  deleteProduct() {
+    this.productService.deleteProduct(this.selectedProduct._id)
+      .subscribe(res => {
+        this.refreshProductList.emit();
+      });
   }
 
 }

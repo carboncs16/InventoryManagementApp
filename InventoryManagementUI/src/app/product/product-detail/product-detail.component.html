@@ -4,7 +4,7 @@
             {{selectedProduct._id}}</span>
 
     </div>
-    <div class="product-list-content">
+    <div *ngIf="!loading" class="product-list-content">
         <div style="padding: 3%">
             <div class="form-group">
                 <label for="productName">Name</label>
@@ -29,9 +29,14 @@
             <div class="text-right">
                 <button class="btn btn-primary btn-spacing" (click)="openAddProductModal()">Add</button>
                 <button class="btn btn-success btn-spacing" (click)="updateProduct()">Save</button>
-                <button class="btn btn-danger btn-spacing">Delete</button>
-                <button class="btn btn-warning btn-spacing">Cancel</button>
+                <button class="btn btn-danger btn-spacing" (click)="deleteProduct()">Delete</button>
+                <button class="btn btn-warning btn-spacing" (click)="hideProductDetail.emit(true)">Cancel</button>
             </div>
+        </div>
+    </div>
+    <div *ngIf="loading" class="border text-center" style="padding: 3%">
+        <div class="spinner-border text-primary" role="status">
+            <span class="sr-only">Loading...</span>
         </div>
     </div>
 </div>

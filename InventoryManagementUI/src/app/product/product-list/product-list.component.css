@@ -17,3 +17,6 @@
     padding: 5%;
     cursor: pointer;
 }
+.text-primary {
+    color: rgb(2, 2, 182);
+}

@@ -16,6 +16,16 @@ product.getProducts = () => {
         });
 }
 
+product.getProductById = (id) => {
+    return productModel.findById(id)
+        .then(res => {
+            return res;
+        })
+        .catch(err => {
+            throw new Error(err);
+        });
+}
+
 product.addProduct = (product) => {
     return productModel.insertMany(product)
         .then(res => {

@@ -1,5 +1,8 @@
 var express = require('express');
+let jwt = require('jsonwebtoken');
+let config = require('../config/config');
 var routing = express.Router();
+var auth = require('../middleware/auth')
 
 var userBusLog = require('../BL/UserBL');
 var productBusLog = require('../BL/ProductBL');
@@ -9,7 +12,13 @@ routing.post('/login', (req, res, next) => {
     var uEmail = req.body.username;
     var uPass = req.body.password;
     return userBusLog.loginUser(uEmail, uPass).then((item) => {
-        res.json(item);
+        let token = jwt.sign({ username: uEmail },
+            config.secret,
+            {
+                expiresIn: '24h' // expires in 24 hours
+            }
+        );
+        res.json({ userData: item, token: token });
     }).catch(function (err) {
         next(err);
     });;
@@ -37,7 +46,7 @@ routing.post('/register', (req, res, next) => {
 });
 
 //Get all products
-routing.get('/getProducts', (req, res, next) => {
+routing.get('/getProducts', auth.checkToken, (req, res, next) => {
     return productBusLog.getProducts().then((items) => {
         res.json(items);
     }).catch(function (err) {
@@ -45,7 +54,15 @@ routing.get('/getProducts', (req, res, next) => {
     });
 });
 
-routing.post('/addProduct', (req, res, next) => {
+routing.get('/getProduct/:id', auth.checkToken, (req, res, next) => {
+    return productBusLog.getProductById(req.params.id).then((items) => {
+        res.json(items);
+    }).catch(function (err) {
+        next(err)
+    });
+});
+
+routing.post('/addProduct', auth.checkToken, (req, res, next) => {
     return productBusLog.addProduct(req.body)
         .then(response => {
             res.json(response);
@@ -54,7 +71,7 @@ routing.post('/addProduct', (req, res, next) => {
         });
 });
 
-routing.delete('/deleteProduct', (req, res, next) => {
+routing.post('/deleteProduct', auth.checkToken, (req, res, next) => {
     return productBusLog.deleteProduct(req.body._id)
         .then(response => {
             res.json(response);
@@ -63,7 +80,7 @@ routing.delete('/deleteProduct', (req, res, next) => {
         });
 });
 
-routing.put('/updateProduct', (req, res, next) => {
+routing.put('/updateProduct', auth.checkToken, (req, res, next) => {
     return productBusLog.updateProduct(req.body)
         .then(response => {
             res.json(response);

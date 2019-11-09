@@ -4,9 +4,9 @@
             <div class="product-header">
                 <h3>Products</h3>
             </div>
-            <div class="product-list-content">
+            <div *ngIf="!loading" class="product-list-content">
                 <div class="row border" style="padding: 3%" *ngFor="let product of products"
-                    (click)="selectedProduct = product">
+                    (click)="selectedProduct = product;hideProductDetail = false;">
                     <div class="col-md-4">
                         {{product.productName}}
                     </div>
@@ -15,14 +15,28 @@
                     </div>
                 </div>
             </div>
+            <div *ngIf="loading" class="product-list-content" style="padding-left: 46%;">
+                <div class="spinner-border text-primary" role="status">
+                    <span class="sr-only">Loading...</span>
+                </div>
+            </div>
         </div>
     </div>
     <div class="col-md-6 offset-1">
-        <div class="border text-center" style="border-radius: 5px;padding: 3%">
+        <div *ngIf="!loading" class="border text-center" style="border-radius: 5px;padding: 3%">
             <h4>Product Count: {{products.length}}</h4>
         </div>
-        <div>
-            <app-product-detail (refreshProductList)="getProducts()" [selectedProduct]="selectedProduct"></app-product-detail>
+        <div *ngIf="loading" class="border text-center" style="padding: 3%;">
+            <div class="spinner-border text-primary" role="status">
+                <span class="sr-only">Loading...</span>
+            </div>
+        </div>
+        <div *ngIf="selectedProduct && !hideProductDetail">
+            <app-product-detail
+            (refreshProductList)="getProducts()"
+            [selectedProductId]="selectedProduct._id"
+            (hideProductDetail)="hideProductDetail = $event">
+            </app-product-detail>
         </div>
     </div>
 </div>
