@@ -1,0 +1,33 @@
+<div class="modal-header">
+    <h4 class="modal-title">Add Product</h4>
+    <button type="button" class="close" aria-label="Close" (click)="activeModal.dismiss()">
+        <span aria-hidden="true">&times;</span>
+    </button>
+</div>
+<div class="product-list-content">
+    <div style="padding: 3%">
+        <div class="form-group">
+            <label for="productName">Name</label>
+            <input type="text" id="productName" [(ngModel)]="selectedProduct.productName" class="form-control">
+        </div>
+        <label for="price">Price</label>
+        <div class="input-group">
+            <div class="input-group-prepend">
+                <span class="input-group-text" id="basic-addon1">$</span>
+            </div>
+            <input type="text" id="price" [(ngModel)]="selectedProduct.price" class="form-control"
+                aria-describedby="basic-addon1">
+        </div>
+        <div class="form-group product-list-box">
+            <div class="product-header">
+                <label for="rating">Rating</label>
+            </div>
+            <div class="product-list-content">
+                <input type="number" id="rating" [(ngModel)]="selectedProduct.rating" class="form-control">
+            </div>
+        </div>
+        <div class="text-right">
+            <button class="btn btn-success btn-spacing" (click)="addProduct()">Save</button>
+        </div>
+    </div>
+</div>
