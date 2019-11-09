@@ -5,14 +5,20 @@
                 <h3>Products</h3>
             </div>
             <div *ngIf="!loading" class="product-list-content">
-                <div class="row border" style="padding: 3%" *ngFor="let product of products"
-                    (click)="selectedProduct = product;hideProductDetail = false;">
-                    <div class="col-md-4">
-                        {{product.productName}}
+                <div *ngIf="products && products.length > 0">
+                    <div class="row border" style="padding: 3%" *ngFor="let product of products"
+                        (click)="selectProduct(product)" [ngClass]="{'selected-row-style': product.rowSelected}">
+                        <div class="col-md-4">
+                            {{product.productName}}
+                        </div>
+                        <div class="col-md-2 offset-6">
+                            {{product.price | currency}}
+                        </div>
                     </div>
-                    <div class="col-md-2 offset-6">
-                        {{product.price | currency}}
-                    </div>
+                </div>
+                <div *ngIf="!products || products.length === 0">
+                    You have no products. Please click <button class="btn btn-primary btn-spacing"
+                        (click)="openAddProductModal()">Add</button> button to add a Product.
                 </div>
             </div>
             <div *ngIf="loading" class="product-list-content" style="padding-left: 46%;">
@@ -20,6 +26,10 @@
                     <span class="sr-only">Loading...</span>
                 </div>
             </div>
+        </div>
+        <div style="margin-top: 2%">
+            <ngb-alert *ngIf="successMsg" [type]="'success'" (close)="close(alert)">{{successMsg}}</ngb-alert>
+            <ngb-alert *ngIf="errorMsg" [type]="'danger'" (close)="close(alert)">{{errorMsg}}</ngb-alert>
         </div>
     </div>
     <div class="col-md-6 offset-1">
@@ -32,10 +42,8 @@
             </div>
         </div>
         <div *ngIf="selectedProduct && !hideProductDetail">
-            <app-product-detail
-            (refreshProductList)="getProducts()"
-            [selectedProductId]="selectedProduct._id"
-            (hideProductDetail)="hideProductDetail = $event">
+            <app-product-detail (refreshProductList)="getProducts();assignMessage($event)"
+                [selectedProductId]="selectedProduct._id" (hideProductDetail)="hideProductDetail = $event">
             </app-product-detail>
         </div>
     </div>

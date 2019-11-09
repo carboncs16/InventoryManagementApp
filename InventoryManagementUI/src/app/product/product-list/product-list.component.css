@@ -20,3 +20,7 @@
 .text-primary {
     color: rgb(2, 2, 182);
 }
+.selected-row-style {
+    color: white;
+    background: rgb(2, 2, 182);
+}

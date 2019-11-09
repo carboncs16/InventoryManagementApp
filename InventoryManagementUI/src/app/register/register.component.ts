@@ -16,8 +16,8 @@ export class RegisterComponent implements OnInit {
     //To check a password between 7 to 16 characters which contain only characters, numeric digits, underscore and first character must be a letter
   });
 
-  successRegistration = false;
-  loading: any = false;
+  successRegistration: boolean = false;
+  loading: boolean = false;
 
   constructor(
     private fb: FormBuilder,
@@ -29,7 +29,6 @@ export class RegisterComponent implements OnInit {
 
   register() {
     this.loading = true;
-    // successRegistration
     if (this.registerData.status === 'VALID') {
       this.loginService.register(this.registerData.value)
         .subscribe(res => {

@@ -30,18 +30,20 @@ export class LoginComponent implements OnInit {
   }
 
   login() {
-    this.loading = true;
-    this.invalidCredential = false;
-    this.loginService.userLogin(this.loginData.value)
-      .pipe(delay(1000))
-      .subscribe(res => {
-        sessionStorage.setItem('x-access-token', res.token);
-        this.loginService.isLoggedIn.next(true);
-        this.router.navigate(['/products']);
-      }, err => {
-        this.loading = false;
-        this.invalidCredential = true;
-      });
+    if (this.loginData.status === 'VALID') {
+      this.loading = true;
+      this.invalidCredential = false;
+      this.loginService.userLogin(this.loginData.value)
+        .pipe(delay(1000))
+        .subscribe(res => {
+          sessionStorage.setItem('x-access-token', res.token);
+          this.loginService.isLoggedIn.next(true);
+          this.router.navigate(['/products']);
+        }, err => {
+          this.loading = false;
+          this.invalidCredential = true;
+        });
+    }
   }
 
 }

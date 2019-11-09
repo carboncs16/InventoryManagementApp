@@ -6,7 +6,7 @@ import { ProductListComponent } from './product-list/product-list.component';
 import { HttpClientModule, HTTP_INTERCEPTORS } from '@angular/common/http';
 import { ProductDetailComponent } from './product-detail/product-detail.component';
 import { FormsModule } from '@angular/forms';
-import { NgbModalModule } from '@ng-bootstrap/ng-bootstrap';
+import { NgbModalModule, NgbAlertModule } from '@ng-bootstrap/ng-bootstrap';
 import { AddProductComponent } from './add-product/add-product.component';
 import { ProductInterceptor } from './product.interceptor';
 
@@ -18,7 +18,8 @@ import { ProductInterceptor } from './product.interceptor';
     ProductRoutingModule,
     HttpClientModule,
     FormsModule,
-    NgbModalModule
+    NgbModalModule,
+    NgbAlertModule
   ],
   providers: [
     { provide: HTTP_INTERCEPTORS, useClass: ProductInterceptor, multi: true }
