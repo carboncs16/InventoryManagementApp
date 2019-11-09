@@ -4,25 +4,50 @@
             <h3>Register</h3>
         </div>
         <div class="register-form">
-            <form [formGroup]="registerData" (ngSubmit)="register()">
+            <form [formGroup]="registerData" (ngSubmit)="register()" #myform="ngForm">
                 <div class="form-group">
                     <label for="username">Username</label>
                     <input type="text" class="form-control" id="username" placeholder="Enter Username"
-                        formControlName="username">
+                        formControlName="username" minlength="5"
+                        [ngClass]="{'border border-danger': registerData.get('username').invalid && myform.submitted && !successRegistration}">
+                    <div class="invalid-feedback" style="display: block"
+                        *ngIf="registerData.get('username').invalid && myform.submitted && !successRegistration">
+                        Username is mandatory and should be atlease 5 characters
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="email">Email-ID</label>
                     <input type="text" class="form-control" id="email" placeholder="Enter Email-ID"
-                        formControlName="email">
+                        formControlName="email"
+                        [ngClass]="{'border border-danger': registerData.get('email').invalid && myform.submitted && !successRegistration}">
+                    <div class="invalid-feedback" style="display: block"
+                        *ngIf="registerData.get('email').invalid && myform.submitted && !successRegistration">
+                        Please enter valid email-id
+                    </div>
                 </div>
                 <div class="form-group">
                     <label for="password">Password</label>
                     <input type="password" class="form-control" id="password" placeholder="Password"
-                        formControlName="password">
+                        formControlName="password"
+                        [ngClass]="{'border border-danger': registerData.get('password').invalid && myform.submitted && !successRegistration}">
+                    <div class="invalid-feedback" style="display: block"
+                        *ngIf="registerData.get('password').invalid && myform.submitted && !successRegistration">
+                        The password is mandatory and must be between 7 to 16 characters with only characters, numeric
+                        digits, underscore and first character must be a letter.
+                    </div>
                 </div>
-                <button type="submit" class="btn btn-success btn-lg btn-block"
-                    [disabled]="registerData.status === 'INVALID'">Register</button>
+                <button type="submit" class="btn btn-success btn-lg btn-block">
+                    <span *ngIf="!loading">Register</span>
+                    <div *ngIf="loading" class="spinner-border text-light" role="status">
+                        <span class="sr-only">Loading...</span>
+                    </div>
+                </button>
             </form>
+            <span>Already Registered? Please <a [routerLink]="['/']">CLick here</a> to
+                Login</span>
         </div>
+    </div>
+    <div class="alert alert-success" *ngIf="successRegistration" role="alert" style="margin-top: 2%;margin-left: 32%;">
+        Registration Success. Please Login with your Username and Password.
     </div>
 </div>

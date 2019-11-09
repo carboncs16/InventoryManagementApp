@@ -3,6 +3,10 @@
     padding-top: 10%;
 }
 
+input:focus {
+    outline: 0px !important;
+}
+
 .register-box {
     border: 1px solid rgb(2, 2, 182);
     border-radius: 5px;
