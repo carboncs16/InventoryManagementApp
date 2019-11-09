@@ -24,17 +24,6 @@ routing.post('/login', (req, res, next) => {
     });;
 });
 
-//User LOGOUT
-routing.get('/logout', function (req, res, next) {
-    var newUser = req.body;
-    return userBusLog.logoutUser(newUser).then((item) => {
-        res.json(item);
-        res.json({ "message": "User logged out successfully" });
-    }).catch(function (err) {
-        next(err);
-    });
-});
-
 //User Register
 routing.post('/register', (req, res, next) => {
     var newUser = req.body;

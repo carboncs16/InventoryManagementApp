@@ -63,6 +63,7 @@ export class ProductListComponent implements OnInit {
   }
 
   selectProduct(product) {
+    this.hideProductDetail = false;
     this.selectedProduct = product;
     this.products.forEach(obj => {
       obj.rowSelected = false;

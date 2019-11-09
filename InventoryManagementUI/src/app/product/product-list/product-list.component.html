@@ -8,10 +8,10 @@
                 <div *ngIf="products && products.length > 0">
                     <div class="row border" style="padding: 3%" *ngFor="let product of products"
                         (click)="selectProduct(product)" [ngClass]="{'selected-row-style': product.rowSelected}">
-                        <div class="col-md-4">
+                        <div class="col-md-4 col-sm-8 col-8">
                             {{product.productName}}
                         </div>
-                        <div class="col-md-2 offset-6">
+                        <div class="col-md-2 offset-md-6 col-sm-4 col-4">
                             {{product.price | currency}}
                         </div>
                     </div>

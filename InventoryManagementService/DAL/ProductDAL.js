@@ -1,9 +1,4 @@
-var mongoose = require('mongoose');
-var productSchema = require('../Schema/ProductSchema');
-mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost:27017/InvertoryManagement', { useNewUrlParser: true, useUnifiedTopology: true });
-
-var productModel = mongoose.model('Product', productSchema);
+var productModel = require('../Schema/ProductSchema');
 var product = {};
 
 product.getProducts = () => {

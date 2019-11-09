@@ -7,4 +7,8 @@ var productSchema = new Schema({
     rating: Number
 });
 
-module.exports = productSchema;
+mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://localhost:27017/InvertoryManagement', { useNewUrlParser: true, useUnifiedTopology: true });
+
+var productModel = mongoose.model('Product', productSchema);
+module.exports = productModel;

@@ -7,4 +7,9 @@ var userSchema = new Schema({
     email: String
 });
 
-module.exports = userSchema;
+mongoose.Promise = global.Promise;
+mongoose.connect('mongodb://localhost:27017/InvertoryManagement', { useNewUrlParser: true, useUnifiedTopology: true });
+
+var userModel = mongoose.model('User', userSchema);
+
+module.exports = userModel;
