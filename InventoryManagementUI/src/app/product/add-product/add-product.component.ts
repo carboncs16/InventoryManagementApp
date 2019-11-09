@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, Output, EventEmitter } from '@angular/core';
 import { NgbActiveModal } from '@ng-bootstrap/ng-bootstrap';
 import { ProductService } from '../product.service';
 
@@ -10,6 +10,7 @@ import { ProductService } from '../product.service';
 export class AddProductComponent implements OnInit {
 
   selectedProduct = {};
+  @Output() refreshProductList = new EventEmitter();
 
   constructor(
     public activeModal: NgbActiveModal,
@@ -22,9 +23,9 @@ export class AddProductComponent implements OnInit {
   addProduct() {
     this.productService.addProduct(this.selectedProduct)
     .subscribe(res => {
-      console.log(res);
-      
-    })
+      this.refreshProductList.emit();
+      this.activeModal.close();
+    });
   }
 
 }
