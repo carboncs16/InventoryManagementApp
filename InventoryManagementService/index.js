@@ -2,7 +2,7 @@ var app = require('express')();
 var bodyParser = require("body-parser");
 var cors = require('cors');
 var router = require('./routes/router.js');
-var appPort=7000;
+var appPort = 7000;
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: true }))
