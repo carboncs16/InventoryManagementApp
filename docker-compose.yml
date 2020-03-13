@@ -1,0 +1,34 @@
+version: "3"
+services:
+  express: #name of the second service
+    build: InventoryManagementService # specify the directory of the Dockerfile
+    expose:
+      - "7000" #specify ports forewarding
+    links:
+      - inventory-db
+    environment:
+      DB_HOST: inventory-db
+  inventory-db:
+    image: "mongo"
+    container_name: "mongo"
+    ports:
+      - "27017:27017"
+    volumes:
+      - inv:/var/lib/mongodb/data
+  nginx:
+    image: nginx
+    volumes:
+      - ./nginx-loadbalancer/nginx.conf:/etc/nginx/nginx.conf:ro
+    depends_on:
+      - express
+    ports:
+      - "4000:4000"
+    links:
+      - express
+  ui:
+    build: "InventoryManagementUI"
+    container_name: "inventory-ui-app"
+    ports:
+      - "4200:80"
+volumes:
+  inv:

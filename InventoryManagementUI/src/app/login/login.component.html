@@ -9,9 +9,9 @@
                     <label for="username">Username</label>
                     <input type="text" class="form-control" id="username" placeholder="Enter Username"
                         formControlName="username"
-                        [ngClass]="{'border border-danger': loginData.get('username').invalid && myform.submitted && !successRegistration}">
+                        [ngClass]="{'border border-danger': loginData.get('username').invalid && myform.submitted}">
                     <div class="invalid-feedback" style="display: block"
-                        *ngIf="loginData.get('username').invalid && myform.submitted && !successRegistration">
+                        *ngIf="loginData.get('username').invalid && myform.submitted">
                         Please enter the Username
                     </div>
                 </div>
@@ -19,9 +19,9 @@
                     <label for="password">Password</label>
                     <input type="password" class="form-control" id="password" placeholder="Password"
                         formControlName="password"
-                        [ngClass]="{'border border-danger': loginData.get('password').invalid && myform.submitted && !successRegistration}">
+                        [ngClass]="{'border border-danger': loginData.get('password').invalid && myform.submitted}">
                     <div class="invalid-feedback" style="display: block"
-                        *ngIf="loginData.get('password').invalid && myform.submitted && !successRegistration">
+                        *ngIf="loginData.get('password').invalid && myform.submitted">
                         Please enter the Password
                     </div>
                 </div>

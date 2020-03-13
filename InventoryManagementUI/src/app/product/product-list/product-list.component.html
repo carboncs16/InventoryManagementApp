@@ -28,8 +28,8 @@
             </div>
         </div>
         <div style="margin-top: 2%">
-            <ngb-alert *ngIf="successMsg" [type]="'success'" (close)="close(alert)">{{successMsg}}</ngb-alert>
-            <ngb-alert *ngIf="errorMsg" [type]="'danger'" (close)="close(alert)">{{errorMsg}}</ngb-alert>
+            <ngb-alert *ngIf="successMsg" [type]="'success'">{{successMsg}}</ngb-alert>
+            <ngb-alert *ngIf="errorMsg" [type]="'danger'">{{errorMsg}}</ngb-alert>
         </div>
     </div>
     <div class="col-md-6 offset-1">

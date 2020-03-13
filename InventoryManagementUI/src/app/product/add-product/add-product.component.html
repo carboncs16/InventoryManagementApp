@@ -10,9 +10,9 @@
             <div class="form-group">
                 <label for="productName">Name</label>
                 <input type="text" id="productName" formControlName="productName" class="form-control"
-                    [ngClass]="{'border border-danger': productData.get('productName').invalid && myform.submitted && !successRegistration}">
+                    [ngClass]="{'border border-danger': productData.get('productName').invalid && myform.submitted }">
                 <div class="invalid-feedback" style="display: block"
-                    *ngIf="productData.get('productName').invalid && myform.submitted && !successRegistration">
+                    *ngIf="productData.get('productName').invalid && myform.submitted ">
                     Please enter the Product Name
                 </div>
             </div>
@@ -23,9 +23,9 @@
                 </div>
                 <input type="text" id="price" formControlName="price" class="form-control"
                     aria-describedby="basic-addon1"
-                    [ngClass]="{'border border-danger': productData.get('price').invalid && myform.submitted && !successRegistration}">
+                    [ngClass]="{'border border-danger': productData.get('price').invalid && myform.submitted }">
                 <div class="invalid-feedback" style="display: block"
-                    *ngIf="productData.get('price').invalid && myform.submitted && !successRegistration">
+                    *ngIf="productData.get('price').invalid && myform.submitted ">
                     Please enter the Price
                 </div>
             </div>
@@ -35,9 +35,9 @@
                 </div>
                 <div class="product-list-content">
                     <input type="number" id="rating" formControlName="rating" class="form-control"
-                        [ngClass]="{'border border-danger': productData.get('rating').invalid && myform.submitted && !successRegistration}">
+                        [ngClass]="{'border border-danger': productData.get('rating').invalid && myform.submitted }">
                     <div class="invalid-feedback" style="display: block"
-                        *ngIf="productData.get('rating').invalid && myform.submitted && !successRegistration">
+                        *ngIf="productData.get('rating').invalid && myform.submitted ">
                         Please enter the Rating
                     </div>
                 </div>

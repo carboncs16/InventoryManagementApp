@@ -8,7 +8,7 @@ var userSchema = new Schema({
 });
 
 mongoose.Promise = global.Promise;
-mongoose.connect('mongodb://localhost:27017/InvertoryManagement', { useNewUrlParser: true, useUnifiedTopology: true });
+mongoose.connect(`mongodb://${process.env.DB_HOST}:${process.env.DB_PORT}/${process.env.DB_NAME}`, { useNewUrlParser: true, useUnifiedTopology: true });
 
 var userModel = mongoose.model('User', userSchema);
 
